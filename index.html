@@ -10,13 +10,140 @@
         <title>TV CHARTS</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <script type="text/javascript"
+            src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+        <style>
+            body{ background:black; color:steelblue; font-size: 1.2em; 
+                font-family: verdana;height: 100%; min-height: 100%; display: flex;
+                flex: 1;flex-direction: column; margin-top:10%;
+            }   
+        </style>      
     </head>
     <body>
+        <section id="chartSection1" style="border:solid 1px steelblue;justify-content: center;flex-direction: column;
+        border-radius: 13px; flex:1; height:10em; display:flex; padding:3%;max-width: 800px;margin:0 10%">
+            <header style="margin-bottom:1em;display:flex;justify-content: space-between;    padding: 0em 1em 0 1em">
+                <span>BTC</span>
+                <span>
+                    <div style="background:#26a69a;border-radius:100%;border:solid 1px steelblue;height:0.5em;width:0.5em;display: inline-block;
+                    margin-right: 0.5em;"></div>
+                    <span style="font-size:0.444em;">PRICE</span>
+                </span>
+                <span>
+                    <div style="background:#2962ff;border-radius:100%;border:solid 1px steelblue;height:0.5em;width:0.5em;display: inline-block;
+                    margin-right: 0.5em;"></div>
+                    <span style="font-size:0.444em;">PnL</span>
+                </span>
+            </header>
+            <article id="chartFrame1" style="justify-content: center;
+                border-radius: 13px; flex:1; display:flex;">
+            </article>
+        </section>
+        <legal style="color:darkslategray;font-size: 0.444em; margin-top: 2%; margin: 0 10% 0 10%;
+            background-color:rgb(9, 0, 18); position: absolute; bottom: 3px; border-radius: 13px; padding:1.444em">
+            <div style="margin-top:0;margin-bottom:0em;">
+                2020 - <span id="dateTXTStamp"></span><script>
+                    const dateTXTStamp = document.getElementById('dateTXTStamp');
+                    dateTXTStamp.innerHTML = new Date().getFullYear();</script> © NetCinematics llc. All rights reserved.
+                Personal ledger system, Generative visualization, not financial advice.
+                Charts generated from <a href="https://www.tradingview.com/">Trading View</a> attribution.
+            </div>
+        </legal>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
-        <script src="" async defer></script>
+       
     </body>
+    <script async defer type="module">
+    let mainChart;
+    function initCandleChart1(){
+        const chartOptions = { width: 400, height: 300, 
+            layout: { textColor: 'steelblue', background: { type: 'solid', color: '#000000' } },
+            grid: { vertLines: { color: "#222" }, horzLines: { color: "#282828" } },
+            crosshair: { mode: LightweightCharts.CrosshairMode.Normal ,
+                vertLine: { color: "darkslategrey" },
+                horzLine: { color: "darkslategrey" },
+            },
+            rightPriceScale:{visible:true,},leftPriceScale:{visible:true},
+        }
+        mainChart = LightweightCharts.createChart(document.getElementById('chartFrame1'), chartOptions);
+
+        
+        const areaSeries = mainChart.addAreaSeries({
+            lineColor: '#2962FF', topColor: '#2962FF',
+            bottomColor: 'rgba(41, 98, 255, 0.28)',layout: { textColor: 'steelblue', 
+            background: { type: 'solid', color: '#000000' } } 
+        });
+        areaSeries.setData([
+            { time: '2018-12-22', value: 232.51 },
+            { time: '2018-12-23', value: 331.11 },
+            { time: '2018-12-24', value: 227.02 },
+            { time: '2018-12-25', value: 327.32 },
+            { time: '2018-12-26', value: 225.17 },
+            { time: '2018-12-27', value: 328.89 },
+            { time: '2018-12-28', value: 225.46 },
+            { time: '2018-12-29', value: 323.92 },
+            { time: '2018-12-30', value: 222.68 },
+            { time: '2018-12-31', value: 322.67 },
+        ]);
+
+        // const baselineSeries = mainChart.addBaselineSeries({ baseValue: { type: 'price', price: 25 }, topLineColor: 'rgba( 38, 166, 154, 1)', topFillColor1: 'rgba( 38, 166, 154, 0.28)', topFillColor2: 'rgba( 38, 166, 154, 0.05)', bottomLineColor: 'rgba( 239, 83, 80, 1)', bottomFillColor1: 'rgba( 239, 83, 80, 0.05)', bottomFillColor2: 'rgba( 239, 83, 80, 0.28)' });
+        // const data = [{ value: 1, time: 1642425322 }, { value: 8, time: 1642511722 }, { value: 10, time: 1642598122 }, { value: 20, time: 1642684522 }, { value: 3, time: 1642770922 }, { value: 43, time: 1642857322 }, { value: 41, time: 1642943722 }, { value: 43, time: 1643030122 }, { value: 56, time: 1643116522 }, { value: 46, time: 1643202922 }];
+        // baselineSeries.setData(data);
+
+        const candlestickSeries = mainChart.addCandlestickSeries({
+            // upColor: '#26a69a', downColor: '#ef5350', borderVisible: true, lineColor: 'lime',
+            // wickUpColor: '#26a69a', wickDownColor: '#ef5350', 
+            priceScaleId: 'left',
+            layout: { textColor: 'steelblue', 
+            background: { type: 'solid', color: '#000000' } }  ,
+            wickUpColor: "#26a69a",
+            upColor: "#26a69a",
+            wickDownColor: "rgb(225, 50, 85)",
+            downColor: "rgb(225, 50, 85)",
+        });
+        candlestickSeries.setData([
+            { time: '2018-12-22', open: 7511.16, high: 8211.84, low: 3611.16, close: 4511.72 },
+            { time: '2018-12-23', open: 4511.12, high: 5311.90, low: 4511.12, close: 4811.09 },
+            { time: '2018-12-24', open: 6011.71, high: 6011.71, low: 5311.39, close: 5911.29 },
+            { time: '2018-12-25', open: 6811.26, high: 6811.26, low: 5911.04, close: 6011.50 },
+            { time: '2018-12-26', open: 6711.71, high: 10511.85, low: 6611.67, close: 9111.04 },
+            { time: '2018-12-27', open: 9111.04, high: 12111.40, low: 8211.70, close: 11111.40 },
+            { time: '2018-12-28', open: 11111.51, high: 14211.83, low: 10311.34, close: 13111.25 },
+            { time: '2018-12-29', open: 13111.33, high: 15111.17, low: 7711.68, close: 9611.43 },
+            { time: '2018-12-30', open: 10611.33, high: 11011.20, low: 9011.39, close: 9811.10 },
+            { time: '2018-12-31', open: 10911.87, high: 11411.69, low: 8511.66, close: 11111.26 },
+        ]);
+
+        // mainChart.timeScale().fitContent();
+
+
+        mainChart.timeScale().fitContent();    
+
+        resizeMainChart();
+    }; initCandleChart1();
+
+    function resizeMainChart(){
+        let frame = document.getElementById('chartSection1');
+        let maxWidth = (frame.offsetWidth>800)?700:frame.offsetWidth-100;
+        let maxHeight = (frame.offsetWidth>800)?600:frame.offsetWidth-200;
+        mainChart.resize(maxWidth, maxHeight);
+    }
+
+    window.addEventListener('resize', () => {
+        resizeMainChart();
+    });
+
+    function example2(){
+        const chartOptions = { width: 400, height: 300, layout: { textColor: 'white', background: { type: 'solid', color: 'black' } } };
+        const chart = LightweightCharts.createChart(document.getElementById('chartFrame1'), chartOptions);
+        const candlestickSeries = chart.addCandlestickSeries({ upColor: '#26a69a', downColor: '#ef5350', borderVisible: false, wickUpColor: '#26a69a', wickDownColor: '#ef5350' });
+
+        const data = [{ open: 10, high: 10.63, low: 9.49, close: 9.55, time: 1642427876 }, { open: 9.55, high: 10.30, low: 9.42, close: 9.94, time: 1642514276 }, { open: 9.94, high: 10.17, low: 9.92, close: 9.78, time: 1642600676 }, { open: 9.78, high: 10.59, low: 9.18, close: 9.51, time: 1642687076 }, { open: 9.51, high: 10.46, low: 9.10, close: 10.17, time: 1642773476 }, { open: 10.17, high: 10.96, low: 10.16, close: 10.47, time: 1642859876 }, { open: 10.47, high: 11.39, low: 10.40, close: 10.81, time: 1642946276 }, { open: 10.81, high: 11.60, low: 10.30, close: 10.75, time: 1643032676 }, { open: 10.75, high: 11.60, low: 10.49, close: 10.93, time: 1643119076 }, { open: 10.93, high: 11.53, low: 10.76, close: 10.96, time: 1643205476 }];
+
+        candlestickSeries.setData(data);
+
+        chart.timeScale().fitContent();        
+    }; //example2();
+    </script>
 </html>
