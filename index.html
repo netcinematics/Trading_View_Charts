@@ -15,7 +15,7 @@
 <style>
     body{ background:black; color:steelblue; font-size: 1em; 
         font-family: verdana;height: 100%; min-height: 100%; display: flex;
-        flex: 1;flex-direction: column; margin-top:4.444%;
+        flex: 1;flex-direction: column; margin-top:4.444%;padding: 1em 2% 2% 2%
     }   
     /* FRAME ************************************************************/
     .FRAME{
@@ -37,12 +37,12 @@
     .BTN:hover{border:1px solid steelblue; color:purple}
     .BTN:active{border:1px solid lime; color:green}
     @media only screen and (max-width: 800px) { /************* TABLET */
-        body{  background-color: #00070d; padding:2%;        
+        body{  background-color: #00070d;         
         }
         .BTN{font-size:0.999em;}
     }  
     @media only screen and (max-width: 500px) { /************* PHONE */
-        body{ background-color: #07000c; padding:1%;
+        body{ background-color: #07000c; 
         }
         .BTN{font-size:1em;}
     }
@@ -54,11 +54,12 @@
         background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0.6) 26%, transparent 26%, transparent 51%, rgba(255, 255, 255, -0.4) 51%, rgba(255, 255, 255, 0.6) 74%, transparent 74%, transparent);
     }  
     /* CUSTOM TITLES **************************************************/
-    .mainTitle {font-size: 1.333em;margin-bottom:1em;display:flex;justify-content: space-between; padding: 0em 1em 0 1em}
+    .mainTitle {font-size: 1.444em;display:flex;justify-content: space-between; padding: 0em 1em 0 1em;
+        text-shadow: -8px -1px 8px blue;}
     .proloTitle {font-size: 0.888em;margin-bottom:1em;display:flex;justify-content: space-between; padding: 2em 3em 0 2em}
     /* CUSTOM EXPANDER **************************************************/
-    .expanderRow {display:flex;justify-content:space-between;padding:0.444em 1em 0.555em 1em;}
-    .expanderTITLE{font-size:0.888em;color:teal;}
+    .expanderROW {display:flex;justify-content:space-between;padding: 0.444em 1em 0.444em 1em;border-bottom:1px dashed #021d33}
+    .expanderTITLE{font-size:0.888em;color:steelblue;    margin-top: 0.333em;}
     .expanderBTN {color:aqua;background:#000033;border:solid 1px seagreen;
         width: 1.444em;text-align: center;border-radius: 50%;box-shadow: 1px 1px 1px teal;
         cursor:pointer;height: 1.444em;
@@ -67,6 +68,13 @@
     .expanderBTN:active{color:cyan;background:blue;border:solid 1px teal;box-shadow:1px 1px 1px black;
     }
 /** END CUSTOM EXPANDER ***************************************************************/    
+/** CUSTOM TV CHARTS ***************************************************************/    
+.tv-lightweight-charts{
+    margin: 1em 0 1em 0;
+    border-radius:13px;
+}
+/** END  TV CHARTS ***************************************************************/    
+
 
 </style>      
     </head>
@@ -75,8 +83,14 @@
         border-radius: 13px; flex:1; height:10em; display:flex; padding:3%;max-width: 800px;margin:0 10%;
         box-shadow: 1px 3px 13px 0px steelblue;align-self:center; width:88.888%;
         ">
-            <header class="mainTitle">
+            <aside style="position:absolute;top:8px;align-self:center;display:flex;">
+                BANKBOOKZ</aside>
+            <header class="mainTitle expanderROW">
                 <span>BTC</span>
+                <span class="expanderBTN" style="font-size:0.777em;" onclick="MINMAX(event)">✧</span>
+            </header>
+            <menu style="justify-content: space-evenly; border-radius: 13px; flex: 1 1 0%; display: flex; 
+                margin-top: 0;padding: 0.222em 0px; width: 66.666%; align-self: center;">
                 <span>
                     <div style="background:#26a69a;border-radius:100%;border:solid 1px steelblue;height:0.5em;width:0.5em;display: inline-block;
                     margin-right: 0.5em;"></div>
@@ -87,23 +101,25 @@
                     margin-right: 0.5em;"></div>
                     <span style="font-size:0.444em;">PROFITnLOSS</span>
                 </span>
-            </header>
-            <article id="candlestickFRAME1" style="justify-content:center;border-radius:13px;
-                flex:1; display:flex;border:solid 1px lime;border-radius:22.222px;">
+            </menu>
+            <article id="candlestickFRAME1" style="justify-content:center;
+                flex:1; display:flex;border:solid 1px steelblue;border-radius:22.222px;width:98%">
             </article>
-            <section style="justify-content: center;margin-top:1em;flex-direction: column;
+            <section style="justify-content: center;margin-top:1em;flex-direction: column; padding:0 2% 0 2%;
             border-radius: 13px; flex:1; display:flex;border:solid 1px teal;width:90%;align-self:center;">
-                <header class="expanderRow" onclick="metadata_MINMAX_Click()">
+                <header class="expanderROW">
                     <span class="expanderTITLE">PnL:</span>
-                    <span class="expanderBTN">✴</span>
+                    <span class="expanderBTN" onclick="MINMAX(event)">✧</span>
                 </header>
                
-                <article id="baselineFRAME1" style="justify-content: center;margin-top:1em;
+                <article id="baselineFRAME1" style="justify-content: center;
                 flex:1; display:flex;">
                 </article>
                 <header class="proloTitle">
                     <span>
-                        <span style="font-size:0.666em;">PnL:</span>
+                        <div style="background:#26a69a;border-radius:100%;border:solid 1px steelblue;height:0.5em;width:0.5em;display: inline-block;
+                        margin-right: 0.5em;"></div>                        
+                        <span style="font-size:0.666em;margin-top: 0.333em;color:steelblue">PnL:</span>
                         <span style="font-size:0.666em;">234</span>
                     </span>
                     <span>
@@ -113,7 +129,7 @@
                         <span style="font-size:0.666em;">1,234</span>
                     </span>
                     <span>
-                        <div style="background:#2962ff;border-radius:100%;border:solid 1px steelblue;height:0.5em;width:0.5em;display: inline-block;
+                        <div style="background:#26a69a;border-radius:100%;border:solid 1px steelblue;height:0.5em;width:0.5em;display: inline-block;
                         margin-right: 0.5em;"></div>
                         <span style="font-size:0.666em;">BANK:</span>
                         <span style="font-size:0.666em;">444</span>
@@ -129,10 +145,11 @@
             </menu>
             <menu id="dataFrame1" class="FRAME" style="justify-content: center;
                 border-radius: 13px; flex:1; display:flex;flex-direction: column;">
-                <header class="expanderRow" onclick="metadata_MINMAX_Click()">
+                <header class="expanderROW">
                     <span class="expanderTITLE">METADATA:</span>
-                    <span class="expanderBTN">✴</span>
+                    <span class="expanderBTN" onclick="MINMAX(event)">✴</span>
                 </header>
+                <section style="display:none;">...</section>
             </menu>
         </section>
         <legal style="color:darkslategray;font-size: 0.444em;margin: 3.333em 10% 0 10%;
@@ -140,9 +157,10 @@
             <div style="margin-top:0;margin-bottom:0em;">
                 2020 - <span id="dateTXTStamp"></span><script>
                     const dateTXTStamp = document.getElementById('dateTXTStamp');
-                    dateTXTStamp.innerHTML = new Date().getFullYear();</script> © NetCinematics llc. All rights reserved.
-                Personal ledger system, Generative visualization, not financial advice.
-                Charts generated from <a href="https://www.tradingview.com/">Trading View</a> attribution.
+                    dateTXTStamp.innerHTML = new Date().getFullYear();</script> BANKBOOKZ&#8482; by © NetCinematics llc. All rights reserved.
+                    See License. DESCRIPTION: Template for Personal_Ledger_System. 
+                    Generative Data Visualization for ARTIFICIAL INTELLIGENCE.
+                    Charts by <a href="https://www.tradingview.com/">Trading View</a> ♥ ~:).
             </div>
         </legal>
         <!--[if lt IE 7]>
@@ -219,7 +237,7 @@
 
     function resizeCandlestickChart1(){
         let frame = document.getElementById('chartSection1');
-        let maxWidth = (frame.offsetWidth>800)?700:frame.offsetWidth-100;
+        let maxWidth = (frame.offsetWidth>800)?700:(frame.offsetWidth<400)?frame.offsetWidth-40:frame.offsetWidth-80;//(frame.offsetWidth*0.1);
         let maxHeight = (frame.offsetWidth>800)?600:frame.offsetWidth-200;
         candlestickChart1.resize(maxWidth, maxHeight);
     }
@@ -227,7 +245,10 @@
     //*************************************************MAIN BASELINE CHART***********
     let baselineChart1;
     function initBaselineChart1(){
-        const chartOptions = { layout: { textColor: 'white', background: { type: 'solid', color: 'black' } } };
+        const chartOptions = { 
+            layout: { textColor: 'white', background: { type: 'solid', color: 'black' } },
+            grid: { vertLines: { color: "#222" }, horzLines: { color: "#282828" } }, 
+        };
         baselineChart1 = LightweightCharts.createChart(document.getElementById('baselineFRAME1'), chartOptions);
         const baselineSeries = baselineChart1.addBaselineSeries({ baseValue: { type: 'price', price: 25 }, topLineColor: 'rgba( 38, 166, 154, 1)', topFillColor1: 'rgba( 38, 166, 154, 0.28)', topFillColor2: 'rgba( 38, 166, 154, 0.05)', bottomLineColor: 'rgba( 239, 83, 80, 1)', bottomFillColor1: 'rgba( 239, 83, 80, 0.05)', bottomFillColor2: 'rgba( 239, 83, 80, 0.28)' });
         const data = [{ value: 1, time: 1642425322 }, { value: 8, time: 1642511722 }, { value: 10, time: 1642598122 }, { value: 20, time: 1642684522 }, { value: 3, time: 1642770922 }, { value: 43, time: 1642857322 }, { value: 41, time: 1642943722 }, { value: 43, time: 1643030122 }, { value: 56, time: 1643116522 }, { value: 46, time: 1643202922 }];
@@ -236,11 +257,29 @@
     }; initBaselineChart1(); 
     function resizeBaselineChart1(){
         let frame = document.getElementById('baselineFRAME1');
-        let maxWidth = (frame.offsetWidth>800)?700:frame.offsetWidth-(frame.offsetWidth*0.1);
+        let maxWidth = (frame.offsetWidth>800)?700:(frame.offsetWidth<400)?frame.offsetWidth-0:frame.offsetWidth-80;//(frame.offsetWidth*0.1);
         let maxHeight = 100;//(frame.offsetWidth>800)?300:frame.offsetWidth-300;
         baselineChart1.resize(maxWidth, maxHeight);
     }; resizeBaselineChart1();
     //*************************************************END MAIN BASELINE CHART***********
+    //*************************************************CUSTOM MINMAX***********
+    function MINMAX(e){ //get parent and hide/show everything but expanderROW
+        const TGT = e.target;
+        const STATE = TGT.innerHTML;
+        const ROW = TGT.parentElement; //required
+        if(ROW.classList.contains("expanderROW")){ //if row hide siblings.
+            let aSibling = ROW.nextElementSibling;
+            while (aSibling) { //loop next siblings
+                if(STATE==='✴'){ //COLLAPSE
+                    aSibling.style.display = 'flex'; //required
+                } else { aSibling.style.display = 'none'; 
+                }//EXPAND (default)
+                aSibling = aSibling.nextElementSibling;
+            }
+        }
+        TGT.innerHTML = (STATE==='✴') ? '✧' : '✴';
+    }    
+    //*************************************************END MINMAX***********
 
 
     //**EVENT-HANDLERS*****************************************************
@@ -248,21 +287,7 @@
         resizeCandlestickChart1();
         resizeBaselineChart1();
     });
-    let metadata_MINMAX_Click = ()=>{
-        console.log('clickd')
-    }
+
     //**END EVENT-HANDLERS*****************************************************
-
-    // function example2(){
-    //     const chartOptions = { width: 400, height: 300, layout: { textColor: 'white', background: { type: 'solid', color: 'black' } } };
-    //     const chart = LightweightCharts.createChart(document.getElementById('candlestickFRAME1'), chartOptions);
-    //     const candlestickSeries = chart.addCandlestickSeries({ upColor: '#26a69a', downColor: '#ef5350', borderVisible: false, wickUpColor: '#26a69a', wickDownColor: '#ef5350' });
-
-    //     const data = [{ open: 10, high: 10.63, low: 9.49, close: 9.55, time: 1642427876 }, { open: 9.55, high: 10.30, low: 9.42, close: 9.94, time: 1642514276 }, { open: 9.94, high: 10.17, low: 9.92, close: 9.78, time: 1642600676 }, { open: 9.78, high: 10.59, low: 9.18, close: 9.51, time: 1642687076 }, { open: 9.51, high: 10.46, low: 9.10, close: 10.17, time: 1642773476 }, { open: 10.17, high: 10.96, low: 10.16, close: 10.47, time: 1642859876 }, { open: 10.47, high: 11.39, low: 10.40, close: 10.81, time: 1642946276 }, { open: 10.81, high: 11.60, low: 10.30, close: 10.75, time: 1643032676 }, { open: 10.75, high: 11.60, low: 10.49, close: 10.93, time: 1643119076 }, { open: 10.93, high: 11.53, low: 10.76, close: 10.96, time: 1643205476 }];
-
-    //     candlestickSeries.setData(data);
-
-    //     chart.timeScale().fitContent();        
-    // }; //example2();
     </script>
 </html>
